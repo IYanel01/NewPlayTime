@@ -1,0 +1,9 @@
+afk_detection: true  # Enables or disables AFK detection
+
+# Default player data structure (filled during runtime)
+players:
+  <uuid>:
+    firstJoin: "<timestamp>"
+    lastLeave: "<timestamp>"
+    joinCount: 0
+    totalTime: 0

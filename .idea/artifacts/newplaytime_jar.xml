@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="newplaytime:jar">
+    <output-path>D:/short/OLD DESKTOP/ZaxPluginTest - Copy/plugins</output-path>
+    <root id="archive" name="newplaytime.jar">
+      <element id="module-output" name="newplaytime" />
+    </root>
+  </artifact>
+</component>

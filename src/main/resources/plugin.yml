@@ -1,0 +1,18 @@
+name: NewPlayTime
+version: '096'
+main: org.yanel.newPlayTime.NewPlayTime
+api-version: '1.20'
+authors: [ Yanel ]
+description: chat plugin
+website: zaxnetwork.xyz
+
+
+commands:
+  npt:
+    description: Shows your playtime
+    usage: /npt
+    permission: newplaytime.use
+  playtime:
+    description: Shows your playtime
+    usage: /playtime
+    permission: newplaytime.use
