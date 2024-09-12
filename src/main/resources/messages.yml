@@ -2,3 +2,5 @@ messages:
   first_join: "&aWelcome %player%! This is your first time joining."
   last_leave: "&eGoodbye %player%! Your session lasted %time%."
   afk_message: "&cYou are AFK! Timer stopped."
+  afk_exit: "&aWelcome back! Your playtime timer has resumed."
+  afk_warning: "&eYou are about to go AFK! Move to avoid being marked AFK."

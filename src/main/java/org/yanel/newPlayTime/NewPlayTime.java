@@ -1,36 +1,50 @@
 package org.yanel.newPlayTime;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.yanel.newPlayTime.Handler.*;
+import org.yanel.newPlayTime.Handler.Commands;
 import org.yanel.newPlayTime.Listener.GUIListener;
 import org.yanel.newPlayTime.Listener.PlayerJoined;
 import org.yanel.newPlayTime.Listener.PlayerLeft;
+import org.yanel.newPlayTime.Handler.DataManager;
+import org.yanel.newPlayTime.Handler.Configs;
+import org.yanel.newPlayTime.Handler.PlayerTime;
+import org.yanel.newPlayTime.Handler.AFKCheck;
 
 public final class NewPlayTime extends JavaPlugin {
 
     private PlayerTime playerTime;
     private AFKCheck afkCheck;
     private Configs configs;
-    private DataManager dataManager;  // Add DataManager instance
+    private DataManager dataManager;
+    private boolean debugMode = false;
 
     @Override
     public void onEnable() {
         // Initialize DataManager first
-        dataManager = new DataManager(this);  // Initialize DataManager to handle data.yml
+        dataManager = new DataManager(this);
 
-        // Initialize PlayerTime and other components
+        // Initialize other components
         playerTime = new PlayerTime(this);
         afkCheck = new AFKCheck(this);
-        configs = new Configs(this);  // Initialize the Configs class to manage messages.yml
+        configs = new Configs(this);
 
         // Register commands
-        getCommand("npt").setExecutor(new Commands(this));
-        getCommand("playtime").setExecutor(new Commands(this));
+        if (getCommand("npt") != null) {
+            getCommand("npt").setExecutor(new Commands(this));
+        } else {
+            getLogger().severe("Command 'npt' is not defined in plugin.yml");
+        }
+
+        if (getCommand("playtime") != null) {
+            getCommand("playtime").setExecutor(new Commands(this));
+        } else {
+            getLogger().severe("Command 'playtime' is not defined in plugin.yml");
+        }
 
         // Register event listeners
         getServer().getPluginManager().registerEvents(new PlayerJoined(this), this);
         getServer().getPluginManager().registerEvents(new PlayerLeft(this), this);
-        getServer().getPluginManager().registerEvents(new GUIListener(this), this);  // Register GUI listener
+        getServer().getPluginManager().registerEvents(new GUIListener(this), this);
 
         // Load configuration
         saveDefaultConfig();
@@ -48,10 +62,18 @@ public final class NewPlayTime extends JavaPlugin {
     }
 
     public Configs getConfigs() {
-        return configs;  // Expose the Configs class to access messages.yml
+        return configs;
     }
 
     public DataManager getDataManager() {
-        return dataManager;  // Expose the DataManager class to access data.yml
+        return dataManager;
+    }
+
+    public boolean isDebugMode() {
+        return debugMode;
+    }
+
+    public void setDebugMode(boolean debugMode) {
+        this.debugMode = debugMode;
     }
 }
